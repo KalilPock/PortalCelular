@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class SideMenuTile extends StatelessWidget {
   const SideMenuTile({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SideMenuTile extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            Navigator.pushNamed(context, '/pag_inicial');
+            Navigator.pushNamed(context, '/cadastro_laboratorio');
           },
           leading: SizedBox(
             height: 34,
@@ -34,6 +34,20 @@ class SideMenuTile extends StatelessWidget {
           ),
           title: Text(
             "Cadastro Laboratório",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, '/cadastro_vitrine'); // Adicionando rota para o novo item
+          },
+          leading: SizedBox(
+            height: 34,
+            width: 34,
+            child: Icon(Icons.storefront), // Ícone para o novo item
+          ),
+          title: Text(
+            "Cadastro Vitrine", // Texto para o novo item
             style: TextStyle(color: Colors.white),
           ),
         ),

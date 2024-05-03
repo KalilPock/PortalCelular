@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:fluuter_portal_celular/components/cadastro_laborat%C3%B3rio.dart';
+import 'package:fluuter_portal_celular/components/cadastro_vitrine.dart';
 import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -39,7 +43,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/pag_inicial',
       routes: {
         '/pag_inicial': (context) => PagInicial(),
+        '/cadastro_laboratorio': (context) => CadastroLaboratorio(),
+        '/cadastro_vitrine': (context) => CadastroVitrine(),
       },
+      
     );
   }
 }
@@ -115,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[],
         ),
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

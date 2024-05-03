@@ -2,17 +2,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CadastroLaboratorio extends StatelessWidget {
+class CadastroVitrine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro Laboratório'),
+        title: Text('Cadastro de Celulares'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushNamed(context,
-                '/pag_inicial'); // Função para voltar para a página anterior
+            Navigator.pushNamed(context, '/pag_inicial'); // Função para voltar para a página anterior
           },
         ),
       ),
@@ -31,45 +30,36 @@ class CadastroLaboratorio extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Preço de Compra'),
+              decoration: InputDecoration(labelText: 'Preço de venda'),
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Avaliação do vendedor'),
+              decoration: InputDecoration(labelText: 'Preço minimo'),
             ),
-            SizedBox(height: 10.0),
+                SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Vendedor  '),
+              decoration: InputDecoration(labelText: 'Loja'),
+              keyboardType: TextInputType.phone,
             ),
             SizedBox(height: 20.0),
             Text(
-              'Informações do Cliente:',
+              'Informações Técnicas:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: InputDecoration(labelText: 'Armazenamento'),
             ),
             SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Número de Telefone'),
+              decoration: InputDecoration(labelText: 'Memória Ram'),
               keyboardType: TextInputType.phone,
             ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'CPF'),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'CEP'),
-              keyboardType: TextInputType.number,
-            ),
+
             SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: () =>
-                  _pickImage(context), // Chamada para a função _pickImage
+              onPressed: () => _pickImage(context), // Chamada para a função _pickImage
               child: Text('Selecionar Foto'), // Texto do botão
             ),
             SizedBox(height: 20.0),
