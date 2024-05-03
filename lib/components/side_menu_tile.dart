@@ -19,7 +19,21 @@ class SideMenuTile extends StatelessWidget {
             child: Icon(Icons.home),
           ),
           title: Text(
-            "Home",
+            "Página inicial",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, '/pag_inicial');
+          },
+          leading: SizedBox(
+            height: 34,
+            width: 34,
+            child: Icon(Icons.build),
+          ),
+          title: Text(
+            "Cadastro Laboratório",
             style: TextStyle(color: Colors.white),
           ),
         ),
