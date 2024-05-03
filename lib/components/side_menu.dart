@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluuter_portal_celular/components/info_card.dart';
-import 'package:rive/rive.dart';
 
 import 'side_menu_tile.dart';
 
