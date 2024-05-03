@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'PortalCell',
       theme: ThemeData(
         // This is the theme of your application.
@@ -34,7 +36,10 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromRGBO(4, 171, 238, 1)),
         useMaterial3: true,
       ),
-      home: const SideBarMenu(),
+      initialRoute: '/pag_inicial',
+      routes: {
+        '/pag_inicial': (context) => PagInicial(),
+      },
     );
   }
 }

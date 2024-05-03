@@ -9,15 +9,10 @@ class SideMenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: Divider(
-            color: Colors.white,
-            height: 1,
-          ),
-        ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/pag_inicial');
+          },
           leading: SizedBox(
             height: 34,
             width: 34,
@@ -26,6 +21,13 @@ class SideMenuTile extends StatelessWidget {
           title: Text(
             "Home",
             style: TextStyle(color: Colors.white),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: Divider(
+            color: Colors.white,
+            height: 1,
           ),
         ),
       ],
