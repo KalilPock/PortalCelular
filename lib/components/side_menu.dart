@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluuter_portal_celular/components/info_card.dart';
 import 'package:rive/rive.dart';
 
+import 'side_menu_tile.dart';
+
 class SideBarMenu extends StatefulWidget {
   const SideBarMenu({super.key});
 
@@ -25,22 +27,17 @@ class _SideBarMenuState extends State<SideBarMenu> {
                 name: '',
                 profession: '',
               ),
-              Column(
-                children: [
-                  ListTile(
-                    onTap: () {},
-                    leading: SizedBox(
-                      height: 34,
-                      width: 34,
-                      child: Icon(Icons.home),
-                    ),
-                    title: Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              )
+              Padding(
+                padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
+                child: Text(
+                  "Browse",
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: Colors.white70),
+                ),
+              ),
+              SideMenuTile()
             ],
           ),
         ),
