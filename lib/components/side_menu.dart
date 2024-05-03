@@ -15,25 +15,36 @@ class _SideBarMenuState extends State<SideBarMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          width: 288,
-          height: double.infinity,
-          color: const Color(0xff17203A),
-          child: SafeArea(
-              child: Column(
+        width: 288,
+        height: double.infinity,
+        color: const Color(0xff17203A),
+        child: SafeArea(
+          child: Column(
             children: [
               const Infocard(
                 name: '',
                 profession: '',
               ),
-              ListTile(
-                leading: SizedBox(
-                  height: 34,
-                  width: 34,
-                  child: RiveAnimation.asset("assets/RiveAssets/icons.riv"),
-                ),
+              Column(
+                children: [
+                  ListTile(
+                    onTap: () {},
+                    leading: SizedBox(
+                      height: 34,
+                      width: 34,
+                      child: Icon(Icons.home),
+                    ),
+                    title: Text(
+                      "Home",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               )
             ],
-          ))),
+          ),
+        ),
+      ),
     );
   }
 }
