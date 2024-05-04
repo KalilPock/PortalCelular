@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fluuter_portal_celular/components/cadastro_laborat%C3%B3rio.dart';
@@ -7,14 +8,27 @@ import 'package:fluuter_portal_celular/components/side_menu.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+        options: FirebaseOptions(
+            apiKey: "AIzaSyBdKhY53GJikHzD2dOt6-IhKbRXx5NWOCI",
+            authDomain: "portalcelular-c1601.firebaseapp.com",
+            databaseURL:
+                "https://portalcelular-c1601-default-rtdb.firebaseio.com",
+            projectId: "portalcelular-c1601",
+            storageBucket: "portalcelular-c1601.appspot.com",
+            messagingSenderId: "494622699243",
+            appId: "1:494622699243:web:0e3dc4feb11291f2d358ae",
+            measurementId: "G-XHQ8NMTL76"));
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -51,7 +65,6 @@ class MyApp extends StatelessWidget {
         '/cadastro_laboratorio': (context) => CadastroLaboratorio(),
         '/cadastro_vitrine': (context) => CadastroVitrine(),
       },
-      
     );
   }
 }
@@ -127,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[],
         ),
       ),
-      
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
