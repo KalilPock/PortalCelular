@@ -16,8 +16,7 @@ Future<void> main() async {
         options: FirebaseOptions(
             apiKey: "AIzaSyBdKhY53GJikHzD2dOt6-IhKbRXx5NWOCI",
             authDomain: "portalcelular-c1601.firebaseapp.com",
-            databaseURL:
-                "https://portalcelular-c1601-default-rtdb.firebaseio.com",
+            databaseURL:"https://portalcelular-c1601-default-rtdb.firebaseio.com",
             projectId: "portalcelular-c1601",
             storageBucket: "portalcelular-c1601.appspot.com",
             messagingSenderId: "494622699243",
