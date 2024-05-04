@@ -1,0 +1,47 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "portalcelular-c1601",
+          "appId": "1:494622699243:android:b9f4e079785462f9d358ae",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "portalcelular-c1601",
+          "configurations": {
+            "android": "1:494622699243:android:b9f4e079785462f9d358ae",
+            "web": "1:494622699243:web:f671a2b99410b503d358ae",
+            "windows": "1:494622699243:web:0e3dc4feb11291f2d358ae"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "hosting": {
+      "port": 24
+    },
+    "ui": {
+      "enabled": true,
+      "port": 25
+    },
+    "singleProjectMode": true
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "494622699243",
+    "project_id": "portalcelular-c1601",
+    "storage_bucket": "portalcelular-c1601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494622699243:android:b9f4e079785462f9d358ae",
+        "android_client_info": {
+          "package_name": "com.example.fluuter_portal_celular"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5BqpzpAuSa015TBH4A_K8N5aSSxoIvyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,8 +5,13 @@ import 'package:fluuter_portal_celular/components/cadastro_vitrine.dart';
 import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
