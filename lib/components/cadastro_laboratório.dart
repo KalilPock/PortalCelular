@@ -65,7 +65,7 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
               SizedBox(height: 10.0),
               TextFormField(
                 controller: _avaliacaoController,
-                decoration: InputDecoration(labelText: 'Descrição do aparelhp'),
+                decoration: InputDecoration(labelText: 'Descrição do aparelho'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a descrição do aparelho';

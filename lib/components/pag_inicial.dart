@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Importe o pacote do Firestore
 
 class PagInicial extends StatefulWidget {
   const PagInicial({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _PagInicialState extends State<PagInicial> {
     return Scaffold(
       drawer: SideBarMenu(),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Color.fromARGB(188, 69, 196, 255),
         title: Text(
           "CristalCell Portal",
         ),
@@ -23,22 +23,36 @@ class _PagInicialState extends State<PagInicial> {
       body: Container(
         color: const Color(0xff17203A),
         padding: EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: 6, // Defina o número de "slots" para os celulares
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: Colors.white,
-              child: ListTile(
-                title: Text('Celular ${index + 1}'),
-                subtitle: Text('Preço: \$ ${1000 + index * 100}'),
-                // Adicione outras informações do celular aqui
-                onTap: () {
-                  // Adicione ação ao clicar no celular, se necessário
-                },
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('aparelhos').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Erro: ${snapshot.error}');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator(); // Exibe um indicador de carregamento enquanto os dados estão sendo carregados
+            }
+
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
               ),
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                return Card(
+                  color: Colors.white,
+                  child: ListTile(
+                    title: Text(data['nome']),
+                    subtitle: Text('Preço: \$ ${data['preco']}'),
+                    // Exiba outras informações do aparelho aqui
+                    onTap: () {
+                      // Adicione ação ao clicar no aparelho, se necessário
+                    },
+                  ),
+                );
+              },
             );
           },
         ),
