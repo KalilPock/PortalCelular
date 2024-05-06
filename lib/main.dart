@@ -9,14 +9,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
-  await Firebase.initializeApp(
+    await Firebase.initializeApp(
         options: FirebaseOptions(
             apiKey: "AIzaSyBdKhY53GJikHzD2dOt6-IhKbRXx5NWOCI",
             authDomain: "portalcelular-c1601.firebaseapp.com",
-            databaseURL:"https://portalcelular-c1601-default-rtdb.firebaseio.com",
+            databaseURL:
+                "https://portalcelular-c1601-default-rtdb.firebaseio.com",
             projectId: "portalcelular-c1601",
             storageBucket: "portalcelular-c1601.appspot.com",
             messagingSenderId: "494622699243",
@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromRGBO(4, 171, 238, 1)),
         useMaterial3: true,
       ),
+      home: const MyHomePage(title: 'PortalCell Home Page'),
       initialRoute: '/pag_inicial',
       routes: {
         '/pag_inicial': (context) => PagInicial(),
