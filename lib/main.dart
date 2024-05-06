@@ -7,6 +7,8 @@ import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
