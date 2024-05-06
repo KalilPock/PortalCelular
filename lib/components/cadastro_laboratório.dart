@@ -77,6 +77,12 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
               TextFormField(
                 controller: _vendedorController,
                 decoration: InputDecoration(labelText: 'Vendedor'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o Vendedor';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 20.0),
               Text(
@@ -86,17 +92,35 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
               SizedBox(height: 10.0),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Nome'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o nome do Cliente';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10.0),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Número de Telefone'),
                 keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o telefone do Cliente';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10.0),
               TextFormField(
                 controller: _cpfController,
                 decoration: InputDecoration(labelText: 'CPF'),
                 keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o CPF do Cliente';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10.0),
               TextFormField(
