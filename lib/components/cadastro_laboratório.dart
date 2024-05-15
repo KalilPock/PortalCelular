@@ -173,17 +173,6 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
   }
 
   Future<void> _botaoCadastroClicado() async {
-    // Verificação de mensagens de depuração
-    print('Botão cadastrar clicado');
-    print('Modelo: ${_modeloController.text}');
-    print('Preço: ${_precoController.text}');
-    print('Avaliação: ${_avaliacaoController.text}');
-    print('Vendedor: ${_vendedorController.text}');
-    print('Nome Cliente: ${_nomeClienteController.text}');
-    print('Telefone Cliente: ${_telefoneClienteController.text}');
-    print('CPF: ${_cpfController.text}');
-    print('CEP: ${_cepController.text}');
-
     // Referência ao Firestore
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 

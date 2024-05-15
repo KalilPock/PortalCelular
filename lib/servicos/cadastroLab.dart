@@ -76,7 +76,7 @@ class CadastroLaboratorio {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
+    if (pickedFile!= null) {
       File imageFile = File(pickedFile.path);
       // Lógica para lidar com a imagem selecionada
     }

@@ -20,11 +20,12 @@ Future<void> main() async {
             appId: "1:494622699243:web:0e3dc4feb11291f2d358ae",
             measurementId: "G-XHQ8NMTL76"));
   } else {
-    await Firebase.initializeApp();
+  await Firebase.initializeApp();
   }
 
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
