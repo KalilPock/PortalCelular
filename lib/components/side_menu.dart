@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluuter_portal_celular/components/info_card.dart';
 
@@ -31,10 +30,10 @@ class _SideBarMenuState extends State<SideBarMenu> {
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
-                      .copyWith(color: Color.fromARGB(0, 255, 255, 255)),
+                      .copyWith(color: const Color.fromARGB(0, 255, 255, 255)),
                 ),
               ),
-              SideMenuTile()
+              const SideMenuTile()
             ],
           ),
         ),

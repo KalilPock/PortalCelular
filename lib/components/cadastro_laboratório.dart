@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CadastroLaboratorio extends StatefulWidget {
+  const CadastroLaboratorio({super.key});
+
   @override
   State<CadastroLaboratorio> createState() => _CadastroLaboratorioState();
 }
@@ -10,39 +13,42 @@ class CadastroLaboratorio extends StatefulWidget {
 class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
   final _formKey = GlobalKey<FormState>(); // Chave global para o Form
 
-  TextEditingController _modeloController = TextEditingController();
-  TextEditingController _precoController = TextEditingController();
-  TextEditingController _avaliacaoController = TextEditingController();
-  TextEditingController _vendedorController = TextEditingController();
-  TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _modeloController = TextEditingController();
+  final TextEditingController _precoController = TextEditingController();
+  final TextEditingController _avaliacaoController = TextEditingController();
+  final TextEditingController _vendedorController = TextEditingController();
+  final TextEditingController _nomeClienteController = TextEditingController();
+  final TextEditingController _telefoneClienteController = TextEditingController();
+  final TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _cepController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro Laboratório'),
+        title: const Text('Cadastro Laboratório'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushNamed(context, '/pag_inicial');
           },
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey, // Associa a chave global ao Form
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
+              const Text(
                 'Dados do Celular:',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _modeloController,
-                decoration: InputDecoration(labelText: 'Modelo'),
+                decoration: const InputDecoration(labelText: 'Modelo'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o modelo';
@@ -50,10 +56,10 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _precoController,
-                decoration: InputDecoration(labelText: 'Preço de Compra'),
+                decoration: const InputDecoration(labelText: 'Preço de Compra'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -62,10 +68,10 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _avaliacaoController,
-                decoration: InputDecoration(labelText: 'Descrição do aparelho'),
+                decoration: const InputDecoration(labelText: 'Descrição do aparelho'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a descrição do aparelho';
@@ -73,10 +79,10 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _vendedorController,
-                decoration: InputDecoration(labelText: 'Vendedor'),
+                decoration: const InputDecoration(labelText: 'Vendedor'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o Vendedor';
@@ -84,14 +90,15 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 'Informações do Cliente:',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Nome'),
+                controller: _nomeClienteController,
+                decoration: const InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o nome do Cliente';
@@ -99,9 +106,10 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Número de Telefone'),
+                controller: _telefoneClienteController,
+                decoration: const InputDecoration(labelText: 'Número de Telefone'),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -110,10 +118,10 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _cpfController,
-                decoration: InputDecoration(labelText: 'CPF'),
+                decoration: const InputDecoration(labelText: 'CPF'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -122,25 +130,31 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
-                decoration: InputDecoration(labelText: 'CEP'),
+                controller: _cepController,
+                decoration: const InputDecoration(labelText: 'CEP'),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: _pickImage,
-                child: Text('Selecionar Foto'),
+                child: const Text('Selecionar Foto'),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     // Se todos os campos forem válidos, prossegue com o cadastro
                     _botaoCadastroClicado();
+                  } else {
+                    // Mostrar mensagem de erro se os campos não forem válidos
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Por favor, preencha todos os campos obrigatórios.')),
+                    );
                   }
                 },
-                child: Text('Cadastrar'),
+                child: const Text('Cadastrar'),
               ),
             ],
           ),
@@ -158,7 +172,37 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
     }
   }
 
-  void _botaoCadastroClicado() {
-    // Lógica para salvar os dados do formulário
+  Future<void> _botaoCadastroClicado() async {
+    // Verificação de mensagens de depuração
+    print('Botão cadastrar clicado');
+    print('Modelo: ${_modeloController.text}');
+    print('Preço: ${_precoController.text}');
+    print('Avaliação: ${_avaliacaoController.text}');
+    print('Vendedor: ${_vendedorController.text}');
+    print('Nome Cliente: ${_nomeClienteController.text}');
+    print('Telefone Cliente: ${_telefoneClienteController.text}');
+    print('CPF: ${_cpfController.text}');
+    print('CEP: ${_cepController.text}');
+
+    // Referência ao Firestore
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      await firestore.collection('laboratorios').add({
+        'modelo': _modeloController.text,
+        'preco': double.parse(_precoController.text),
+        'avaliacao': _avaliacaoController.text,
+        'vendedor': _vendedorController.text,
+        'nomeCliente': _nomeClienteController.text,
+        'telefoneCliente': _telefoneClienteController.text,
+        'cpf': _cpfController.text,
+        'cep': _cepController.text,
+        'created_at': FieldValue.serverTimestamp(), // Adiciona um timestamp
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cadastro realizado com sucesso!')));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
+    }
   }
 }

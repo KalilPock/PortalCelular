@@ -1,20 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:fluuter_portal_celular/components/cadastro_laborat%C3%B3rio.dart';
 import 'package:fluuter_portal_celular/components/cadastro_vitrine.dart';
 import 'package:fluuter_portal_celular/components/pag_inicial.dart';
-import 'package:fluuter_portal_celular/components/side_menu.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
+        options: const FirebaseOptions(
             apiKey: "AIzaSyBdKhY53GJikHzD2dOt6-IhKbRXx5NWOCI",
             authDomain: "portalcelular-c1601.firebaseapp.com",
             databaseURL:
@@ -57,14 +52,14 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromRGBO(4, 171, 238, 1)),
+            ColorScheme.fromSeed(seedColor: const Color.fromRGBO(4, 171, 238, 1)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'PortalCell Home Page'),
       initialRoute: '/pag_inicial',
       routes: {
-        '/pag_inicial': (context) => PagInicial(),
-        '/cadastro_laboratorio': (context) => CadastroLaboratorio(),
+        '/pag_inicial': (context) => const PagInicial(),
+        '/cadastro_laboratorio': (context) => const CadastroLaboratorio(),
         '/cadastro_vitrine': (context) => CadastroVitrine(),
       },
     );
@@ -121,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(

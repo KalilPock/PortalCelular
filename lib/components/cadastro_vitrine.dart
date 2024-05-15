@@ -13,33 +13,35 @@ class CadastroVitrine extends StatelessWidget {
   final TextEditingController _armazenamentoController = TextEditingController();
   final TextEditingController _memoriaRamController = TextEditingController();
 
+  CadastroVitrine({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Celulares'),
+        title: const Text('Cadastro de Celulares'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushNamed(context, '/pag_inicial');
           },
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
+              const Text(
                 'Dados do Celular:',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _modeloController,
-                decoration: InputDecoration(labelText: 'Modelo'),
+                decoration: const InputDecoration(labelText: 'Modelo'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o modelo';
@@ -47,10 +49,10 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _precoVendaController,
-                decoration: InputDecoration(labelText: 'Preço de venda'),
+                decoration: const InputDecoration(labelText: 'Preço de venda'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -59,10 +61,10 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _precoMinimoController,
-                decoration: InputDecoration(labelText: 'Preço mínimo'),
+                decoration: const InputDecoration(labelText: 'Preço mínimo'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o preço mínimo';
@@ -70,10 +72,10 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _lojaController,
-                decoration: InputDecoration(labelText: 'Loja'),
+                decoration: const InputDecoration(labelText: 'Loja'),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -82,15 +84,15 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 'Informações Técnicas:',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _armazenamentoController,
-                decoration: InputDecoration(labelText: 'Armazenamento'),
+                decoration: const InputDecoration(labelText: 'Armazenamento'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o tamanho de Armazenamento';
@@ -98,10 +100,10 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: _memoriaRamController,
-                decoration: InputDecoration(labelText: 'Memória Ram'),
+                decoration: const InputDecoration(labelText: 'Memória Ram'),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -110,19 +112,19 @@ class CadastroVitrine extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () => _pickImage(context),
-                child: Text('Selecionar Foto'),
+                child: const Text('Selecionar Foto'),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _cadastrarCelular(context);
                   }
                 },
-                child: Text('Cadastrar'),
+                child: const Text('Cadastrar'),
               ),
             ],
           ),
@@ -152,7 +154,7 @@ class CadastroVitrine extends StatelessWidget {
         'armazenamento': _armazenamentoController.text,
         'memoria_ram': _memoriaRamController.text,
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cadastro realizado com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cadastro realizado com sucesso!')));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
     }

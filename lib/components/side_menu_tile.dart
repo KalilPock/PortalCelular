@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class SideMenuTile extends StatelessWidget {
   const SideMenuTile({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,12 @@ class SideMenuTile extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, '/pag_inicial');
           },
-          leading: SizedBox(
+          leading: const SizedBox(
             height: 34,
             width: 34,
             child: Icon(Icons.home),
           ),
-          title: Text(
+          title: const Text(
             "Página inicial",
             style: TextStyle(color: Colors.white),
           ),
@@ -27,12 +27,12 @@ class SideMenuTile extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, '/cadastro_laboratorio');
           },
-          leading: SizedBox(
+          leading: const SizedBox(
             height: 34,
             width: 34,
             child: Icon(Icons.build),
           ),
-          title: Text(
+          title: const Text(
             "Cadastro Laboratório",
             style: TextStyle(color: Colors.white),
           ),
@@ -41,18 +41,18 @@ class SideMenuTile extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, '/cadastro_vitrine'); // Adicionando rota para o novo item
           },
-          leading: SizedBox(
+          leading: const SizedBox(
             height: 34,
             width: 34,
             child: Icon(Icons.storefront), // Ícone para o novo item
           ),
-          title: Text(
+          title: const Text(
             "Cadastro Vitrine", // Texto para o novo item
             style: TextStyle(color: Colors.white),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
+        const Padding(
+          padding: EdgeInsets.only(left: 24),
           child: Divider(
             color: Colors.white,
             height: 1,
