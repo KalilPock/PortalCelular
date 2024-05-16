@@ -21,7 +21,16 @@ class _PagInicialState extends State<PagInicial> {
         ),
       ),
       body: Container(
-        color: const Color(0xff17203A),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF199ad3),
+              Color(0xFF1d9bd2),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('aparelhos').snapshots(),

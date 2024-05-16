@@ -15,7 +15,7 @@ class _SideBarMenuState extends State<SideBarMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color(0xff17203A),
+        color: Color.fromRGBO(14 , 55, 74, 1),
         child: SafeArea(
           child: Column(
             children: [
@@ -30,7 +30,7 @@ class _SideBarMenuState extends State<SideBarMenu> {
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
-                      .copyWith(color: const Color.fromARGB(0, 255, 255, 255)),
+                      .copyWith(color: const Color.fromRGBO(14 , 55, 74, 1),),
                 ),
               ),
               const SideMenuTile()
