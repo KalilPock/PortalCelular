@@ -4,6 +4,8 @@ import 'package:fluuter_portal_celular/components/cadastro_laborat%C3%B3rio.dart
 import 'package:fluuter_portal_celular/components/cadastro_vitrine.dart';
 import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluuter_portal_celular/components/telaCadastro.dart';
+import 'package:fluuter_portal_celular/components/telaLogin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,8 +59,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'PortalCell Home Page'),
-      initialRoute: '/pag_inicial',
+      initialRoute: '/telaLogin',
       routes: {
+        '/telaCadastro': (context) => const TelaCadastro(),
+        '/telaLogin': (context) => const TelaLogin(),
         '/pag_inicial': (context) => const PagInicial(),
         '/cadastro_laboratorio': (context) => const CadastroLaboratorio(),
         '/cadastro_vitrine': (context) => CadastroVitrine(),
