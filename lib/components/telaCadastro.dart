@@ -16,10 +16,12 @@ class _TelaCadastroState extends State<TelaCadastro> {
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
+
+        // Navegue para a página inicial após o cadastro bem-sucedido
         Navigator.pushReplacementNamed(context, '/home');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
@@ -30,14 +32,14 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff17203A),
+      backgroundColor: const Color(0xff17203A),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Color(0xff1d9bd2),
+              color: const Color(0xff1d9bd2),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Form(
@@ -60,7 +62,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.white),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -76,7 +78,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       labelText: 'Senha',
                       labelStyle: TextStyle(color: Colors.white),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -89,7 +91,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   ElevatedButton(
                     onPressed: _register,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF199AD3),
+                      backgroundColor: const Color(0xFF199AD3),
                     ),
                     child: const Text('Cadastrar'),
                   ),

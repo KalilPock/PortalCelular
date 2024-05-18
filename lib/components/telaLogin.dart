@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluuter_portal_celular/servicos/autenticacao.dart';
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
@@ -14,31 +13,56 @@ class _TelaLoginState extends State<TelaLogin> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<void> _login() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-        Navigator.pushReplacementNamed(context, '/home');
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao fazer login: $e')));
-      }
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+Future<void> _login() async {
+  print('Login button pressed');
+  if (_formKey.currentState?.validate() ?? false) {
+    print('Form is valid');
+    String? errorMessage = await logarUsuarios(
+      email: _emailController.text.trim(),
+      senha: _passwordController.text.trim(),
+    );
+    if (errorMessage == null) {
+      print('Login successful');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login realizado com sucesso!')),
+      );
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      print('Login error: $errorMessage');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao fazer login: $errorMessage')),
+      );
+    }
+  } else {
+    print('Form is invalid');
+  }
+}
+
+  Future<String?> logarUsuarios({
+    required String email,
+    required String senha,
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff17203A),
+      backgroundColor: const Color(0xff17203A),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Color(0xff1d9bd2),
+              color: const Color(0xff1d9bd2),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Form(
@@ -61,7 +85,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.white),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -77,7 +101,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       labelText: 'Senha',
                       labelStyle: TextStyle(color: Colors.white),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -90,7 +114,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF199AD3),
+                      backgroundColor: const Color(0xFF199AD3),
                     ),
                     child: const Text('Login'),
                   ),

@@ -30,7 +30,8 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushNamed(context, '/pag_inicial');
+            print('Back button pressed'); // Adiciona mensagem de depuração
+            Navigator.pushReplacementNamed(context, '/home');
           },
         ),
       ),
@@ -150,7 +151,7 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
                   } else {
                     // Mostrar mensagem de erro se os campos não forem válidos
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Por favor, preencha todos os campos obrigatórios.')),
+                      const SnackBar(content: Text('Por favor, preencha todos os campos obrigatórios.')),
                     );
                   }
                 },
@@ -177,7 +178,7 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     try {
-      await firestore.collection('laboratorios').add({
+      await firestore.collection('laboratorio').add({
         'modelo': _modeloController.text,
         'preco': double.parse(_precoController.text),
         'avaliacao': _avaliacaoController.text,
@@ -189,7 +190,7 @@ class _CadastroLaboratorioState extends State<CadastroLaboratorio> {
         'created_at': FieldValue.serverTimestamp(), // Adiciona um timestamp
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cadastro realizado com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cadastro realizado com sucesso!')));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
     }

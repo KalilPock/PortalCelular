@@ -23,7 +23,7 @@ class CadastroVitrine extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushNamed(context, '/pag_inicial');
+            Navigator.pushReplacementNamed(context, '/home');
           },
         ),
       ),
