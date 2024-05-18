@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluuter_portal_celular/components/side_menu.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Importe o pacote do Firestore
 
 class PagInicial extends StatefulWidget {
-  const PagInicial({super.key});
+  const PagInicial({Key? key}) : super(key: key);
 
   @override
   State<PagInicial> createState() => _PagInicialState();
@@ -33,32 +33,75 @@ class _PagInicialState extends State<PagInicial> {
         ),
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('aparelhos').snapshots(),
+          stream: FirebaseFirestore.instance.collection('celulares').snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              print('Erro: ${snapshot.error}');
+              return Center(child: Text('Erro: ${snapshot.error}'));
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator(); // Exibe um indicador de carregamento enquanto os dados estão sendo carregados
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return const Center(child: Text('Nenhum aparelho encontrado.'));
             }
 
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                childAspectRatio: 0.8,
               ),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+
+                print('Documento encontrado: ${snapshot.data!.docs[index].id}');
+
                 return Card(
                   color: Colors.white,
-                  child: ListTile(
-                    title: Text(data['nome']),
-                    subtitle: Text('Preço: \$ ${data['preco']}'),
-                    // Exiba outras informações do aparelho aqui
-                    onTap: () {
-                      // Adicione ação ao clicar no aparelho, se necessário
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (data['imagemUrl'] != null)
+                          Image.network(
+                            data['imagemUrl'],
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          data['modelo'] ?? 'Sem modelo',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4.0),
+                        Text('Armazenamento: ${data['armazenamento'] ?? 'N/A'} GB'),
+                        Text('Memória RAM: ${data['memoria_ram'] ?? 'N/A'} GB'),
+                        Text('Loja: ${data['loja'] ?? 'N/A'}'),
+                        Text('Preço Mínimo: R\$ ${data['preco_minimo'] ?? 'N/A'}'),
+                        Text('Preço de Venda: R\$ ${data['preco_venda'] ?? 'N/A'}'),
+                        const SizedBox(height: 4.0),
+                        Text(
+                          'Descrição: ${data['avaliacao'] ?? 'Sem descrição'}',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4.0),
+                        Text(
+                          'Vendedor: ${data['vendedor'] ?? 'N/A'}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

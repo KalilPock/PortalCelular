@@ -11,7 +11,7 @@ class SideMenuTile extends StatelessWidget {
       children: [
         ListTile(
           onTap: () {
-            Navigator.pushNamed(context, '/pag_inicial');
+            Navigator.pushReplacementNamed(context, '/home');
           },
           leading: const SizedBox(
             height: 34,
@@ -39,7 +39,8 @@ class SideMenuTile extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            Navigator.pushNamed(context, '/cadastro_vitrine'); // Adicionando rota para o novo item
+            Navigator.pushNamed(context,
+                '/cadastro_vitrine'); // Adicionando rota para o novo item
           },
           leading: const SizedBox(
             height: 34,
