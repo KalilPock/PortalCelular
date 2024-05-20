@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';  // Importe o pacote do Firestore
 
 class TelaCadastro extends StatefulWidget {
   const TelaCadastro({super.key});
@@ -20,6 +21,12 @@ class _TelaCadastroState extends State<TelaCadastro> {
           email: _emailController.text,
           password: _passwordController.text,
         );
+
+        // Adicione o usuário ao Firestore com a função inicial "user"
+        await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+          'email': _emailController.text,
+          'role': 'user', // Função inicial como "user"
+        });
 
         // Navegue para a página inicial após o cadastro bem-sucedido
         Navigator.pushReplacementNamed(context, '/home');

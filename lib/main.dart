@@ -4,6 +4,7 @@ import 'package:fluuter_portal_celular/components/cadastro_laborat%C3%B3rio.dart
 import 'package:fluuter_portal_celular/components/cadastro_vitrine.dart';
 import 'package:fluuter_portal_celular/components/pag_inicial.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluuter_portal_celular/components/relatoriosLaboratorio.dart';
 import 'package:fluuter_portal_celular/components/telaCadastro.dart';
 import 'package:fluuter_portal_celular/components/telaLogin.dart';
 
@@ -22,12 +23,11 @@ Future<void> main() async {
             appId: "1:494622699243:web:0e3dc4feb11291f2d358ae",
             measurementId: "G-XHQ8NMTL76"));
   } else {
-  await Firebase.initializeApp();
+    await Firebase.initializeApp();
   }
 
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: const Color.fromRGBO(4, 171, 238, 1)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromRGBO(4, 171, 238, 1)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'PortalCell Home Page'),
@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const PagInicial(),
         '/cadastro_laboratorio': (context) => const CadastroLaboratorio(),
         '/cadastro_vitrine': (context) => CadastroVitrine(),
+        '/relatorio_laboratorio': (context) => RelatoriosLaboratorio(),
       },
     );
   }

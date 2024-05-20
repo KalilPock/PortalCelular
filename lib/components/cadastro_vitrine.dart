@@ -12,6 +12,8 @@ class CadastroVitrine extends StatelessWidget {
   final TextEditingController _lojaController = TextEditingController();
   final TextEditingController _armazenamentoController = TextEditingController();
   final TextEditingController _memoriaRamController = TextEditingController();
+  final TextEditingController _imeiController = TextEditingController();
+  final TextEditingController _cpfClienteController = TextEditingController();
 
   CadastroVitrine({super.key});
 
@@ -76,7 +78,6 @@ class CadastroVitrine extends StatelessWidget {
               TextFormField(
                 controller: _lojaController,
                 decoration: const InputDecoration(labelText: 'Loja'),
-                keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a loja';
@@ -108,6 +109,29 @@ class CadastroVitrine extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a quantidade de Memoria RAM';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10.0),
+              TextFormField(
+                controller: _imeiController,
+                decoration:
+                    const InputDecoration(labelText: 'IMEI do Aparelho'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o IMEI do aparelho';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10.0),
+              TextFormField(
+                controller: _cpfClienteController,
+                decoration: const InputDecoration(labelText: 'CPF do Cliente'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o CPF do cliente';
                   }
                   return null;
                 },
@@ -153,10 +177,15 @@ class CadastroVitrine extends StatelessWidget {
         'loja': _lojaController.text,
         'armazenamento': _armazenamentoController.text,
         'memoria_ram': _memoriaRamController.text,
+        'imei': _imeiController.text,
+        'cpf_cliente': _cpfClienteController.text,
+
       });
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cadastro realizado com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Cadastro realizado com sucesso!')));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
     }
   }
 }
