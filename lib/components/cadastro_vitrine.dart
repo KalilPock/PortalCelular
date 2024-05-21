@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class CadastroVitrine extends StatelessWidget {
+class CadastroVitrine extends StatefulWidget {
+  const CadastroVitrine({Key? key}) : super(key: key);
+
+  @override
+  _CadastroVitrineState createState() => _CadastroVitrineState();
+}
+
+class _CadastroVitrineState extends State<CadastroVitrine> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _modeloController = TextEditingController();
   final TextEditingController _precoVendaController = TextEditingController();
@@ -14,8 +22,7 @@ class CadastroVitrine extends StatelessWidget {
   final TextEditingController _memoriaRamController = TextEditingController();
   final TextEditingController _imeiController = TextEditingController();
   final TextEditingController _cpfClienteController = TextEditingController();
-
-  CadastroVitrine({super.key});
+  File? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -162,13 +169,21 @@ class CadastroVitrine extends StatelessWidget {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
     }
   }
 
-  void _cadastrarCelular(BuildContext context) async {
+  Future<void> _cadastrarCelular(BuildContext context) async {
     try {
       await Firebase.initializeApp();
+      String? imageUrl;
+
+      if (_imageFile != null) {
+        imageUrl = await _uploadImageToFirebase(_imageFile!);
+      }
+
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       await firestore.collection('celulares').add({
         'modelo': _modeloController.text,
@@ -179,13 +194,27 @@ class CadastroVitrine extends StatelessWidget {
         'memoria_ram': _memoriaRamController.text,
         'imei': _imeiController.text,
         'cpf_cliente': _cpfClienteController.text,
-
+        'imageUrl': imageUrl,
       });
+
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Cadastro realizado com sucesso!')));
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
+    }
+  }
+
+  Future<String> _uploadImageToFirebase(File imageFile) async {
+    try {
+      String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      Reference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child('uploads/$fileName');
+      UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      return await taskSnapshot.ref.getDownloadURL();
+    } catch (e) {
+      throw Exception('Erro ao fazer upload da imagem: $e');
     }
   }
 }
