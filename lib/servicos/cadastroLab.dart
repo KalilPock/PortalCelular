@@ -64,7 +64,7 @@ class CadastroLaboratorio {
       });
 
       // Exibe mensagem de sucesso
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cadastro realizado com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cadastro realizado com sucesso!')));
     } catch (e) {
       // Exibe mensagem de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));

@@ -15,7 +15,7 @@ class _SideBarMenuState extends State<SideBarMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromRGBO(14 , 55, 74, 1),
+        color: const Color.fromRGBO(14 , 55, 74, 1),
         child: SafeArea(
           child: Column(
             children: [

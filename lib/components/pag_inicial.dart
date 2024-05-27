@@ -4,7 +4,7 @@ import 'package:fluuter_portal_celular/components/side_menu.dart';
 import 'package:fluuter_portal_celular/components/telaDetalhesCelular.dart';
 
 class PagInicial extends StatefulWidget {
-  const PagInicial({Key? key}) : super(key: key);
+  const PagInicial({super.key});
 
   @override
   State<PagInicial> createState() => _PagInicialState();

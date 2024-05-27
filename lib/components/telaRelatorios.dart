@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TelaRelatorios extends StatefulWidget {
-  const TelaRelatorios({Key? key}) : super(key: key);
+  const TelaRelatorios({super.key});
 
   @override
   _TelaRelatoriosState createState() => _TelaRelatoriosState();

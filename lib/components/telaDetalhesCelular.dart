@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TelaDetalhesCelular extends StatelessWidget {
   final DocumentSnapshot celular;
 
-  const TelaDetalhesCelular({Key? key, required this.celular}) : super(key: key);
+  const TelaDetalhesCelular({super.key, required this.celular});
 
   @override
   Widget build(BuildContext context) {
